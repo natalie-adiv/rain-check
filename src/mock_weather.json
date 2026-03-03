@@ -1,0 +1,55 @@
+{
+  "tel_aviv": {
+    "stationId": 85,
+    "location": "Tel Aviv Coast",
+    "forecast": [
+      {
+        "date": "2026-02-25",
+        "rain_prob": 10,
+        "weather_description": "Partly Cloudy"
+      },
+      {
+        "date": "2026-02-26",
+        "rain_prob": 70,
+        "weather_description": "Showers"
+      }
+    ]
+  },
+  "raanana": {
+    "stationId": 122,
+    "location": "Raanana Area",
+    "forecast": [
+      {
+        "date": "2026-02-25",
+        "rain_prob": 5,
+        "weather_description": "Clear"
+      },
+      {
+        "date": "2026-02-26",
+        "rain_prob": 5,
+        "weather_description": "Clear"
+      },
+      {
+        "date": "2026-02-27",
+        "rain_prob": 85,
+        "weather_description": "Heavy Rain"
+      }
+    ]
+  },
+  "jerusalem": {
+    "stationId": 54,
+    "location": "Jerusalem Center",
+    "forecast": [
+      {
+        "date": "2026-02-25",
+        "rain_prob": 20,
+        "weather_description": "Cloudy"
+      },
+      {
+        "date": "2026-02-26",
+        "rain_prob": 15,
+        "weather_description": "Partly Cloudy"
+      }
+    ]
+  }
+}
