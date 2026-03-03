@@ -32,20 +32,21 @@ To keep your API keys secure and follow industry best practices for a **Senior S
    ```bash
    touch .env
 
-2. **Add your API credentials** to the file:
+2. **Add your API credentials** to the `.env` file:
    ```env
-   WEATHER_API_KEY=
-   CITY_NAME=Ra'anana
+   WEATHER_API_KEY=your_api_key_here
+   CITY_NAME=your_city_Name
 
 3. **Note**: Ensure your `.gitignore` includes `.env` to avoid leaking credentials to GitHub.
+
 
 
 ## 💻 Setup & Usage
 
 1. **Clone the repository**:
    ```bash
-   git clone [https://github.com/natalie-adiv/RainCheck.git](https://github.com/natalie-adiv/RainCheck.git)
-   cd RainCheck   
+   git clone [https://github.com/natalie-adiv/rain-check.git](https://github.com/natalie-adiv/rain-check.git)
+   cd rain-check   
 
 2. **Install dependencies**:
    ```bash
@@ -70,4 +71,5 @@ As part of my **Master of Science in Machine Learning & Big Data**, I plan to ex
 
 * **Predictive Models**: Using historical weather patterns to forecast localized rain events with higher accuracy.
 * **Data Pipelines**: Implementing advanced data collection for long-term weather trend analysis.
+
 
