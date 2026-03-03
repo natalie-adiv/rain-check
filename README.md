@@ -34,7 +34,7 @@ To keep your API keys secure and follow industry best practices for a **Senior S
 
 2. **Add your API credentials** to the file:
    ```env
-   WEATHER_API_KEY=your_actual_api_key_here
+   WEATHER_API_KEY=
    CITY_NAME=Ra'anana
 
 3. **Note**: Ensure your `.gitignore` includes `.env` to avoid leaking credentials to GitHub.
@@ -70,3 +70,4 @@ As part of my **Master of Science in Machine Learning & Big Data**, I plan to ex
 
 * **Predictive Models**: Using historical weather patterns to forecast localized rain events with higher accuracy.
 * **Data Pipelines**: Implementing advanced data collection for long-term weather trend analysis.
+
