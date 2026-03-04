@@ -1,27 +1,30 @@
 import json
-import os
+from pathlib import Path
 
-from debugpy.common.timestamp import current
-
+# Finding the full path of the folder where the app is running
+BASE_DIR = Path(__file__).resolve().parent
 
 class SettingsManager:
     def __init__(self, filename="settings.json"):
-        # Finding the full path of the folder where the app is running
-        self._current_dir = os.path.dirname(os.path.abspath(__file__))
-        self._file_path = os.path.join(self._current_dir, filename)
+        # Constructs the path to the settings file in the same folder
+        self._file_path = BASE_DIR / filename
 
         # Default settings
+        # Note: Using a list for 'cities' because JSON does not support sets
         self._default_settings = {
-            "cities": {"raanana"},
+            "cities": ["raanana"],
             "notification_hour": 20
         }
 
     def load_settings(self):
-        if not os.path.exists(self._file_path):
+        """
+        Loads settings from the JSON file. Returns defaults if file doesn't exist.
+        """
+        if not self._file_path.exists():
             return self._default_settings
 
         try:
-            with open(self._file_path, 'r', encoding='uft-8') as f:
+            with open(self._file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
             print(f"Error reading settings file: {e}")
@@ -30,12 +33,14 @@ class SettingsManager:
 
     def save_settings(self, **kwargs):
         """
-        Accepts arguments named (kwargs) and updates only those in the existing file.
-        Example usage: save_settings(cities=["raanana"])
+        Accepts arguments as keyword arguments and updates the existing settings file.
+        Example usage: save_settings(cities=["raanana", "tel_aviv"])
         """
+
         # Loading all existing settings
         current_settings = self.load_settings()
 
+        # Update specific keys
         for key, value in kwargs.items():
             current_settings[key] = value
 

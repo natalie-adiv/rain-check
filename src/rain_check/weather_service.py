@@ -1,12 +1,18 @@
 import json
-import os
 import requests
+from pathlib import Path
+
+# Finding the full path of the folder where the app is running
+BASE_DIR = Path(__file__).resolve().parent
+
+# Constructs the path to the JSON file in the same folder.
+MOCK_FILE_PATH = BASE_DIR / "mock_weather.json"
 
 class WeatherService:
-    def __init__(self, token=None, mock_file=None):
+    def __init__(self, token=None, use_mock_file=False):
         self._base_url = "https://ims.gov.il/ims/node/47"   # Endpoint for daily forecast
         self._headers = {"Authorization": f"ApiToken {token}"} if token else {}
-        self._mock_file = mock_file
+        self._use_mock_file = use_mock_file
 
         # Mapping cities to station identifiers
         self._city_stations = {
@@ -17,18 +23,11 @@ class WeatherService:
     def get_forecast(self, city):
         if city is None:
             return None
-        if self._mock_file:
-            try:
-                current_dir = os.path.dirname(os.path.abspath(__file__))
-                file_path = os.path.join(current_dir, self._mock_file)
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    if not data:
-                        return None
-                    return data[city]
-            except Exception as e:
-                print(f"Error reading mock file: {e}")
+        if self._use_mock_file:
+            data = self.read_mock()
+            if not data:
                 return None
+            return data[city]
 
         station_id = self._city_stations.get(city.lower())
         if not station_id:
@@ -42,6 +41,15 @@ class WeatherService:
         except Exception as e:
             print(f"API Error: {e}")
         return None
+
+    def read_mock(self):
+        try:
+            with open(MOCK_FILE_PATH, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return data
+        except FileNotFoundError:
+            print(f"Error reading mock file: {MOCK_FILE_PATH}")
+            return None
 
     def should_take_umbrella(self, city):
         data = self.get_forecast(city)

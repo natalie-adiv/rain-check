@@ -1,7 +1,7 @@
-from weather_service import WeatherService
+from rain_check.weather_service import WeatherService
 
-def run_test():
-    service = WeatherService(mock_file="mock_weather.json")
+def test_weather_logic():
+    service = WeatherService(use_mock_file=True)
     cities_to_check = ["tel_aviv", "raanana"]
 
     print("--- RainCheck Service Test ---")
@@ -13,4 +13,4 @@ def run_test():
 
 
 if __name__ == "__main__":
-    run_test()
+    test_weather_logic()
