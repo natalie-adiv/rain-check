@@ -4,12 +4,12 @@
     "location": "Tel Aviv Coast",
     "forecast": [
       {
-        "date": "2026-02-25",
+        "date": "2026-03-06",
         "rain_prob": 10,
         "weather_description": "Partly Cloudy"
       },
       {
-        "date": "2026-02-26",
+        "date": "2026-03-07",
         "rain_prob": 70,
         "weather_description": "Showers"
       }
@@ -20,17 +20,12 @@
     "location": "Raanana Area",
     "forecast": [
       {
-        "date": "2026-02-25",
+        "date": "2026-03-06",
         "rain_prob": 5,
         "weather_description": "Clear"
       },
       {
-        "date": "2026-02-26",
-        "rain_prob": 5,
-        "weather_description": "Clear"
-      },
-      {
-        "date": "2026-02-27",
+        "date": "2026-03-07",
         "rain_prob": 85,
         "weather_description": "Heavy Rain"
       }
@@ -41,12 +36,12 @@
     "location": "Jerusalem Center",
     "forecast": [
       {
-        "date": "2026-02-25",
+        "date": "2026-03-06",
         "rain_prob": 20,
         "weather_description": "Cloudy"
       },
       {
-        "date": "2026-02-26",
+        "date": "2026-03-06",
         "rain_prob": 15,
         "weather_description": "Partly Cloudy"
       }

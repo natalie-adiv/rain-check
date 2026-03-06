@@ -1,0 +1,9 @@
+{
+    "cities": [
+        "tel_aviv",
+        "raanana"
+    ],
+    "notification_hour": 12,
+  "sleep_time": 10
+
+}
