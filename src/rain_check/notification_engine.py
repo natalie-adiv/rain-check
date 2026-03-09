@@ -1,16 +1,35 @@
 import time
+import logging
 from datetime import datetime
 from rain_check.settings_manager import SettingsManager
 from rain_check.weather_service import WeatherService
 from plyer import notification
 
+# Create a logger
+logger = logging.getLogger(__name__)
+
 class NotificationEngine:
+    """
+    The core logic for monitoring time and weather conditions.
+    This engine runs a continuous loop, checks the forecast for selected cities,
+    and triggers system notifications when rain is predicted.
+    """
+
     def __init__(self, settings_mgr: SettingsManager, weather_srv: WeatherService):
+        """
+        Initializes the notification engine.
+
+        Args:
+            settings_mgr (SettingsManager): Manager for application settings.
+            weather_srv (WeatherService): Service to fetch weather data.
+        """
         self._settings_mgr = settings_mgr
         self.weather_srv = weather_srv
         self._has_alert_sent = False
 
     def start(self):
+        """Starts the continuous loop to check weather conditions and trigger notifications."""
+        logger.info("start NotificationEngine")
         while True:
             settings = self._settings_mgr.load_settings()
             notification_hour = settings.get("notification_hour")
@@ -24,9 +43,16 @@ class NotificationEngine:
                         self._send_system_notification(f"Rain ☔ is expected in {formatted_cities}, take an umbrella!")
                     self._has_alert_sent = True
             else:
-                print("This is not the time to send an alert.")
+                logger.info("This is not the time to send an alert.")
                 self._has_alert_sent = False
             time.sleep(settings.get("sleep_time", 60))
 
     def _send_system_notification(self, msg):
+        """
+        Displays a native operating system notification.
+
+        Args:
+            msg (str): The message to display.
+        """
         notification.notify(title="RainCheck Alert", message=msg, app_name='RainCheck', timeout=15)
+        logger.info(msg)

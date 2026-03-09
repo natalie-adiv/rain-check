@@ -5,7 +5,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 
 class SettingsManager:
+    """
+    Handles persistence of application settings.
+    Responsible for reading from and writing to the 'settings.json' file,
+    ensuring that user preferences are maintained across sessions.
+    """
+
     def __init__(self, filename="settings.json"):
+        """Initializes the settings manager with the target file path and default configurations."""
+
         # Constructs the path to the settings file in the same folder
         self._file_path = BASE_DIR / filename
 
@@ -18,7 +26,8 @@ class SettingsManager:
 
     def load_settings(self):
         """
-        Loads settings from the JSON file. Returns defaults if file doesn't exist.
+        Loads settings from the JSON configuration file.
+        Returns default settings if the file does not exist or fails to load.
         """
         if not self._file_path.exists():
             return self._default_settings
@@ -33,10 +42,11 @@ class SettingsManager:
 
     def save_settings(self, **kwargs):
         """
-        Accepts arguments as keyword arguments and updates the existing settings file.
-        Example usage: save_settings(cities=["raanana", "tel_aviv"])
-        """
+        Updates specific keys in the settings file without overwriting the entire configuration.
 
+        Args:
+            **kwargs: Key-value pairs of settings to update (e.g., cities=["raanana"]).
+        """
         # Loading all existing settings
         current_settings = self.load_settings()
 

@@ -1,9 +1,17 @@
 {
+    "notification_hour": 13,
+    "sleep_time": 10,
     "cities": [
         "tel_aviv",
         "raanana"
     ],
-    "notification_hour": 12,
-  "sleep_time": 10
-
+    "logging": {
+      "_comment_file_type":  "json or text",
+      "file_type": "json",
+      "log_file": "../logs/rain_check.log",
+      "mode": "a",
+      "level": "INFO",
+      "message_format": "%(asctime)s - %(levelname)s - %(name)s - %(lineno)d - %(message)s",
+      "date_format": "%Y-%m-%d %H:%M:%S"
+    }
 }

@@ -1,6 +1,10 @@
 import json
 import requests
+import logging
 from pathlib import Path
+
+# Create a logger
+logger = logging.getLogger(__name__)
 
 # Finding the full path of the folder where the app is running
 BASE_DIR = Path(__file__).resolve().parent
@@ -9,7 +13,19 @@ BASE_DIR = Path(__file__).resolve().parent
 MOCK_FILE_PATH = BASE_DIR / "mock_weather.json"
 
 class WeatherService:
+    """
+    A service layer for interacting with weather data.
+    Supports fetching live data from the IMS API or simulating data using a local mock file.
+    """
+
     def __init__(self, token=None, use_mock_file=False):
+        """
+        Initializes the weather service.
+
+        Args:
+            token (str, optional): API token for the weather service.
+            use_mock_file (bool): If True, reads data from a local mock JSON file instead of the API.
+        """
         self._base_url = "https://ims.gov.il/ims/node/47"   # Endpoint for daily forecast
         self._headers = {"Authorization": f"ApiToken {token}"} if token else {}
         self._use_mock_file = use_mock_file
@@ -21,6 +37,15 @@ class WeatherService:
         }
 
     def get_forecast(self, city):
+        """
+        Retrieves the weather forecast for a specified city.
+
+        Args:
+            city (str): The name of the city.
+
+        Returns:
+            dict or None: The forecast data, or None if the request fails.
+        """
         if city is None:
             return None
         if self._use_mock_file:
@@ -39,27 +64,33 @@ class WeatherService:
             if response.status_code == 200:
                 return response.json()
         except Exception as e:
-            print(f"API Error: {e}")
+            logger.error(f"API Error: {e}")
         return None
 
     def read_mock(self):
+        """Reads and returns forecast data from the local mock JSON file."""
         try:
             with open(MOCK_FILE_PATH, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 return data
         except FileNotFoundError:
-            print(f"Error reading mock file: {MOCK_FILE_PATH}")
+            logger.error(f"Error reading mock file: {MOCK_FILE_PATH}")
             return None
 
     def should_take_umbrella(self, city):
+        """
+        Determines if an umbrella is needed based on the rain probability for the next day.
+
+        Args:
+            city (str): The name of the city to check.
+
+        Returns:
+            bool: True if the rain probability exceeds 30%, False otherwise.
+        """
         data = self.get_forecast(city)
         if not data:
             return False
 
-        # Logic: We'll check the forecast for tomorrow
-        # In the IMS data, we look for the Daily Forecast and analyze the chances of rain
-        # This is where your logic comes in: for example, if the Rain probability > 30%
-        # or if "Rain" appears in the weather description.
         forecast_list = data.get('forecast', [])
 
         # Check that there are at least two members (today and tomorrow)
