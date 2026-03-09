@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="RainCheck_Logo.png" width="200" alt="RainCheck Logo">
+</p>
+
 # 🌦️ RainCheck
 
 RainCheck is a Python-based automation tool designed to monitor real-time weather data and provide proactive notifications for rain alerts. By integrating with external Weather APIs, the system helps users stay prepared for changing weather conditions.
