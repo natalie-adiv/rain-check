@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="RainCheck_Logo.png" width="200" alt="RainCheck Logo">
+  <img src="assets/RainCheck_Logo.png" width="200" alt="RainCheck Logo">
 </p>
 
 # 🌦️ RainCheck
